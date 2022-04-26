@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class StateAlone : CrowState
 {
+    Vector3 moveDirection;
+
     public override void Awake()
     {
-
+        moveDirection = new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f)).normalized;
+        moveDirection *= 4;
     }
 
     public override void Update()
@@ -17,6 +20,8 @@ public class StateAlone : CrowState
         {
             machine.ChangeState(new StateAvoidance());
         }
+
+        crow.transform.position += moveDirection * Time.deltaTime;
     }
 
     public override void FixedUpdate()
