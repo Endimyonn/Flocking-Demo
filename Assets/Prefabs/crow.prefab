@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 137929820870274369}
   - component: {fileID: 2742394450548824459}
   - component: {fileID: 6287872362595802208}
+  - component: {fileID: -7825759471082310277}
   m_Layer: 0
   m_Name: crow
-  m_TagString: Untagged
+  m_TagString: Crow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,3 +95,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0542a7832ed18af449229189ca064a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flocker: {fileID: 0}
+  avoidThese: []
+  targetThis: {fileID: 0}
+--- !u!114 &-7825759471082310277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399468493781121118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1f84d9728161948b70417b3350d6c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultState: StateAlone
+  currentState: 
+  previousState: 

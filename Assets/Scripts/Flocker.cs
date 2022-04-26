@@ -10,10 +10,9 @@ public class Flocker : MonoBehaviour
     public GameObject crowPrefab;
     [HideInInspector] public List<Crow> crows;
 
-    [Header("Flock parameters")]
-    public float flockCohesionLimit = 13f;
+    [Header("Crow parameters")]
     public float crowSeparationDist = 2.1f;
-    public float crowFOV = 270f;
+    public float crowShinyRange;
 
     [Header("Spawning area")]
     public float spawnAreaX;
@@ -23,6 +22,11 @@ public class Flocker : MonoBehaviour
     private void Awake()
     {
         lastCrows = numCrows;
+    }
+
+    private void Start()
+    {
+        SpawnCrows();
     }
 
 
@@ -36,8 +40,8 @@ public class Flocker : MonoBehaviour
 
     public void SpawnCrow()
     {
-        Vector3 crowPosition = new Vector3(Random.Range(-spawnAreaX, spawnAreaX), 0, Random.Range(-spawnAreaY, spawnAreaY));
-        GameObject crow = GameObject.Instantiate(crowPrefab, crowPosition, Quaternion.Euler(crowPrefab.transform.eulerAngles.x, 0, Random.Range(0, 360));
+        Vector3 crowPosition = new Vector3(Random.Range(-spawnAreaX, spawnAreaX), spawnHeight, Random.Range(-spawnAreaY, spawnAreaY));
+        GameObject crow = GameObject.Instantiate(crowPrefab, crowPosition, Quaternion.Euler(crowPrefab.transform.eulerAngles.x, 0, Random.Range(0, 360)));
         crow.GetComponent<Crow>().flocker = this;
         //init crow?
     }

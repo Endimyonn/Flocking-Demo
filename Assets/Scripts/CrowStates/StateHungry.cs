@@ -11,7 +11,12 @@ public class StateHungry : CrowState
 
     public override void Update()
     {
-        
+        crow.CheckAround();
+
+        if (crow.avoidThese.Count > 0)
+        {
+            machine.ChangeState(new StateAvoidance());
+        }
     }
 
     public override void FixedUpdate()

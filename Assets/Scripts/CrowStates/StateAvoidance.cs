@@ -11,7 +11,14 @@ public class StateAvoidance : CrowState
 
     public override void Update()
     {
+        crow.CheckAround();
 
+        if (crow.avoidThese.Count == 0)
+        {
+            machine.ChangeState(new StateAlone());
+        }
+
+        crow.transform.position += (crow.GetAvoidanceDirection() * Time.deltaTime);
     }
 
     public override void FixedUpdate()
@@ -21,7 +28,7 @@ public class StateAvoidance : CrowState
 
     public override void LateUpdate()
     {
-
+        Gizmos.DrawLine(crow.transform.position, crow.transform.position + crow.GetAvoidanceDirection());
     }
 
     public override void OnCollisionEnter(Collision other)
