@@ -13,9 +13,15 @@ public class Crow : MonoBehaviour
     public void CheckAround()
     {
         GameObject[] others = GameObject.FindGameObjectsWithTag("Crow");
+        avoidThese.Clear();
 
         foreach (GameObject other in others)
         {
+            if (other == this.gameObject)
+            {
+                continue;
+            }
+
             if (Vector3.Distance(transform.position, other.transform.position) < flocker.crowSeparationDist)
             {
                 avoidThese.Add(other);
@@ -54,9 +60,15 @@ public class Crow : MonoBehaviour
 
             finalDirection /= directions.Count;
 
-            return finalDirection;
+            return -finalDirection.normalized * flocker.crowSeparationStrength;
         }
 
         return Vector3.zero;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + GetAvoidanceDirection());
     }
 }

@@ -19,6 +19,7 @@ public class StateAvoidance : CrowState
         }
 
         crow.transform.position += (crow.GetAvoidanceDirection() * Time.deltaTime);
+        crow.transform.rotation = Quaternion.LookRotation(crow.GetAvoidanceDirection());
     }
 
     public override void FixedUpdate()
@@ -28,7 +29,7 @@ public class StateAvoidance : CrowState
 
     public override void LateUpdate()
     {
-        Gizmos.DrawLine(crow.transform.position, crow.transform.position + crow.GetAvoidanceDirection());
+        
     }
 
     public override void OnCollisionEnter(Collision other)

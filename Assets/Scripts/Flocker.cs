@@ -12,6 +12,7 @@ public class Flocker : MonoBehaviour
 
     [Header("Crow parameters")]
     public float crowSeparationDist = 2.1f;
+    public float crowSeparationStrength = 3.0f;
     public float crowShinyRange;
 
     [Header("Spawning area")]
