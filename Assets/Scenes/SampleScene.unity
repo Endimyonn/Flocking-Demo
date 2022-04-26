@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d9be8c20a43694781dc5c3394f007c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCrows: 25
+  numCrows: 100
   crowPrefab: {fileID: 4399468493781121118, guid: 094db7210011db74283b5a771411b823, type: 3}
   crows: []
   crowSeparationDist: 3.32
