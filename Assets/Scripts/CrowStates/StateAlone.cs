@@ -21,6 +21,11 @@ public class StateAlone : CrowState
             machine.ChangeState(new StateAvoidance());
         }
 
+        if (crow.targetThis != null)
+        {
+            machine.ChangeState(new StateHungry());
+        }
+
         crow.transform.position += moveDirection * Time.deltaTime;
     }
 

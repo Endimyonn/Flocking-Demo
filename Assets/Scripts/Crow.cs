@@ -10,6 +10,11 @@ public class Crow : MonoBehaviour
     public List<GameObject> avoidThese;
     public GameObject targetThis;
 
+    private void Update()
+    {
+        
+    }
+
     public void CheckAround()
     {
         GameObject[] others = GameObject.FindGameObjectsWithTag("Crow");
@@ -22,7 +27,7 @@ public class Crow : MonoBehaviour
                 continue;
             }
 
-            if (Vector3.Distance(transform.position, other.transform.position) < flocker.crowSeparationDist)
+            if (Vector3.Distance(transform.position, other.transform.position) <= flocker.crowSeparationDist)
             {
                 avoidThese.Add(other);
             }
@@ -32,11 +37,12 @@ public class Crow : MonoBehaviour
             }
         }
 
-        if (targetThis != null)
+        GameObject[] shinies = GameObject.FindGameObjectsWithTag("Shiny");
+        foreach (GameObject shiny in shinies)
         {
-            if (Vector3.Distance(transform.position, targetThis.transform.position) > flocker.crowShinyRange)
+            if (Vector3.Distance(transform.position, shiny.transform.position) <= flocker.crowShinyRange)
             {
-                targetThis = null;
+                targetThis = shiny;
             }
         }
     }

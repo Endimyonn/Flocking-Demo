@@ -6,7 +6,7 @@ public class StateHungry : CrowState
 {
     public override void Awake()
     {
-
+        Debug.Log("entering hungry state");
     }
 
     public override void Update()
@@ -17,6 +17,15 @@ public class StateHungry : CrowState
         {
             machine.ChangeState(new StateAvoidance());
         }
+
+        if (crow.targetThis == null)
+        {
+            machine.ChangeState(new StateAlone());
+        }
+
+        Vector3 moveDirection = (crow.transform.position - crow.targetThis.transform.position).normalized * -3;
+        moveDirection.y = 0;
+        crow.transform.position += moveDirection * Time.deltaTime;
     }
 
     public override void FixedUpdate()
