@@ -7,6 +7,7 @@ public class StateMachine : MonoBehaviour
     public string defaultState;
     protected StateBase curState;
     protected StateBase lastState;
+    public bool validateTransitions = false;
 
     //for external use
     public string currentState = "";
@@ -51,25 +52,23 @@ public class StateMachine : MonoBehaviour
 
         if (argState != null && argState.GetType() != curState.GetType())
         {
-            if (curState.validTransitions.Contains(argState.GetType().ToString()))
+            if (validateTransitions == true && curState.validTransitions.Contains(argState.GetType().ToString()) == false)
             {
-                if (curState != null)   //make sure it exists first to prevent issues when first setting the state on init
-                {
-                    lastState = curState;
-                    previousState = lastState.GetType().ToString();
-                    curState.StateExit();
-                }
-                curState = argState;
-                currentState = curState.GetType().ToString();
-                curState.StateInitialize(this);
-                curState.Awake();
-                curState.StateEnter();
-                returnValue.success = true;
+                return new ChangeStateResult(false, ChangeStateFailureReason.CurrentStateRefused);
             }
-            else
+
+            if (curState != null)   //make sure it exists first to prevent issues when first setting the state on init
             {
-                returnValue.failureReason = ChangeStateFailureReason.CurrentStateRefused;
+                lastState = curState;
+                previousState = lastState.GetType().ToString();
+                curState.StateExit();
             }
+            curState = argState;
+            currentState = curState.GetType().ToString();
+            curState.StateInitialize(this);
+            curState.Awake();
+            curState.StateEnter();
+            returnValue.success = true;
         }
         else if (argState == null && argState.GetType() == curState.GetType())
         {
@@ -133,6 +132,12 @@ public struct ChangeStateResult
 {
     public bool success;
     public ChangeStateFailureReason failureReason;
+
+    public ChangeStateResult(bool argSuccess, ChangeStateFailureReason argFailureReason = ChangeStateFailureReason.None)
+    {
+        success = argSuccess;
+        failureReason = argFailureReason;
+    }
 }
 
 public enum ChangeStateFailureReason : byte
